@@ -10,11 +10,11 @@ import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
 const getAwsConfig = (region?: string) => {
   return {
     region: region || process.env.AWS_DEFAULT_REGION || "ap-south-1",
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    credentials: process.env.AWS_ACCESS_KEY_ID ? {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
       ...(process.env.AWS_SESSION_TOKEN ? { sessionToken: process.env.AWS_SESSION_TOKEN } : {}),
-    },
+    } : undefined,
   };
 };
 
