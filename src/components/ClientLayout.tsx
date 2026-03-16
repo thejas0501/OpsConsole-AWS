@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { LayoutDashboard, DollarSign, Database, Container, Server, ArrowRightLeft, Box, Zap, Shield, Trash2, Network, TrendingDown, Clock, ChevronRight, ChevronDown, Globe } from "lucide-react";
+import { LayoutDashboard, DollarSign, Database, Container, Server, ArrowRightLeft, Box, Zap, Shield, Trash2, Network, TrendingDown, Clock, ChevronRight, ChevronDown, Globe, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { RegionProvider, useRegion } from "@/components/RegionProvider";
 
 const navItems = [
@@ -102,8 +102,114 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ── Auth Overlay ────────────────────────────────────────────────── */
+function AuthOverlay({ onAuthenticated }: { onAuthenticated: () => void }) {
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(true); // Default to true as per user request "should appear"
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!password) return;
+    
+    setLoading(true);
+    setError("");
+    
+    try {
+      const res = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      
+      const data = await res.json();
+      
+      if (data.success) {
+        localStorage.setItem('ops_auth', 'true');
+        onAuthenticated();
+      } else {
+        setError(data.message || "Invalid password");
+      }
+    } catch (err) {
+      setError("Connection error. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-[#030711] flex items-center justify-center p-6">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px]" />
+      
+      <div className="relative w-full max-w-[400px] bg-[#0a0f1a] border border-white/[0.08] rounded-3xl shadow-2xl p-8 backdrop-blur-xl">
+        <div className="flex flex-col items-center text-center mb-8">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-600 flex items-center justify-center shadow-2xl shadow-cyan-500/20 mb-6 scale-110">
+            <Lock size={28} className="text-white" />
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">OpsConsole Access</h2>
+          <p className="text-slate-400 text-sm">Enter password to access the dashboard</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-[11px] font-bold uppercase tracking-widest text-slate-500 ml-1">Password</label>
+            <div className="relative group">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoFocus
+                className={`w-full bg-white/[0.03] border ${error ? 'border-red-500/50' : 'border-white/[0.06]'} group-hover:border-cyan-500/30 focus:border-cyan-500/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none transition-all placeholder:text-slate-700`}
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-slate-500 hover:text-cyan-400 transition-colors"
+              >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+            {error && <p className="text-[11px] text-red-400 mt-2 ml-1 flex items-center gap-1.5 font-medium animate-in fade-in slide-in-from-top-1">
+              <span className="w-1 h-1 rounded-full bg-red-400" />
+              {error}
+            </p>}
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold py-3 rounded-xl shadow-lg shadow-cyan-500/20 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            {loading ? <Loader2 size={18} className="animate-spin" /> : "Access Dashboard"}
+          </button>
+        </form>
+        
+        <div className="mt-8 pt-6 border-t border-white/[0.04] text-center">
+          <p className="text-[10px] text-slate-500 font-medium tracking-wide uppercase">Cloud · SRE · Operations</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function LayoutInner({ children }: { children: React.ReactNode }) {
   const { region } = useRegion();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    // Check local storage for auth state
+    const authStatus = localStorage.getItem('ops_auth');
+    setIsAuthenticated(authStatus === 'true');
+  }, []);
+
+  if (isAuthenticated === null) return null; // Wait for hydrate
+
+  if (!isAuthenticated) {
+    return <AuthOverlay onAuthenticated={() => setIsAuthenticated(true)} />;
+  }
 
   return (
     <>
