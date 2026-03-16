@@ -105,7 +105,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 /* ── Auth Overlay ────────────────────────────────────────────────── */
 function AuthOverlay({ onAuthenticated }: { onAuthenticated: () => void }) {
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(true); // Default to true as per user request "should appear"
+  const [showPassword, setShowPassword] = useState(false); // Changed to false for security
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
