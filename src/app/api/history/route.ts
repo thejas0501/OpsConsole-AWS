@@ -2,11 +2,16 @@ import { NextResponse } from "next/server";
 import { CloudTrailClient, LookupEventsCommand } from "@aws-sdk/client-cloudtrail";
 
 function getCreds() {
-  if (!process.env.AWS_ACCESS_KEY_ID) return undefined;
+  const accessKeyId = process.env.AWS_ACCESS_KEY_ID?.trim();
+  const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY?.trim();
+  const sessionToken = process.env.AWS_SESSION_TOKEN?.trim();
+
+  if (!accessKeyId || !secretAccessKey) return undefined;
+
   return {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID.trim(),
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!.trim(),
-    sessionToken: process.env.AWS_SESSION_TOKEN?.trim(),
+    accessKeyId,
+    secretAccessKey,
+    sessionToken,
   };
 }
 
