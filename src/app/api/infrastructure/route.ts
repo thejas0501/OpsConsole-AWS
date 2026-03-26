@@ -149,16 +149,34 @@ export async function GET(request: Request) {
             addEdge("internet", clusterId, "traffic");
           }
 
-          // Services
+          // Services — paginate through all of them
           try {
-            const svcsRes = await ecs.send(new ListServicesCommand({ cluster: c.clusterArn }));
-            if ((svcsRes.serviceArns || []).length > 0) {
-              const svcDesc = await ecs.send(new DescribeServicesCommand({ cluster: c.clusterArn, services: svcsRes.serviceArns!.slice(0, 10) }));
+            const allSvcArns: string[] = [];
+            let nextSvcToken: string | undefined;
+            do {
+              const svcsRes = await ecs.send(
+                new ListServicesCommand({ cluster: c.clusterArn, nextToken: nextSvcToken, maxResults: 100 })
+              );
+              allSvcArns.push(...(svcsRes.serviceArns || []));
+              nextSvcToken = svcsRes.nextToken ?? undefined;
+            } while (nextSvcToken);
+
+            // DescribeServices accepts max 10 per call
+            for (let i = 0; i < allSvcArns.length; i += 10) {
+              const batch = allSvcArns.slice(i, i + 10);
+              const svcDesc = await ecs.send(
+                new DescribeServicesCommand({ cluster: c.clusterArn, services: batch })
+              );
               for (const svc of (svcDesc.services || [])) {
                 const s = svc as any;
                 const svcId = `ecs-svc-${s.serviceName}`;
                 ecsServiceIds.push(svcId);
-                nodes.push({ id: svcId, type: "ecs", label: s.serviceName, subLabel: `${s.runningCount}/${s.desiredCount} tasks · ${s.launchType || "EC2"}`, status: s.status || "ACTIVE" });
+                nodes.push({
+                  id: svcId, type: "ecs",
+                  label: s.serviceName,
+                  subLabel: `${s.runningCount}/${s.desiredCount} tasks · ${s.launchType || "EC2"}`,
+                  status: s.status || "ACTIVE",
+                });
                 addEdge(clusterId, svcId, "runs");
               }
             }

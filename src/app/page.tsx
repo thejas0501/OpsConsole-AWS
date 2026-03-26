@@ -44,64 +44,152 @@ function StatCard({ icon: Icon, label, value, sub, color }: { icon: any; label: 
   );
 }
 
-/* ─── Cost Chart (premium SVG) ─────────────────────────────────────── */
-function CostChart({ data }: { data: { date: string; amount: number }[] }) {
-  if (!data || data.length === 0) return <p className="text-slate-600 text-xs text-center py-8">No data</p>;
+/* ─── Premium Cost Chart (dual: daily bars + cumulative line) ────── */
+function CostChart({ data, avgPerDay }: {
+  data: { date: string; amount: number; cumulative: number }[];
+  avgPerDay: number;
+}) {
+  if (!data || data.length === 0)
+    return <p className="text-slate-600 text-xs text-center py-8">No data</p>;
 
-  const maxVal = Math.max(...data.map(d => d.amount), 0.01);
-  const w = 700, h = 220, pad = { t: 25, r: 20, b: 35, l: 55 };
+  const w = 720, h = 240;
+  const pad = { t: 20, r: 24, b: 40, l: 60 };
   const plotW = w - pad.l - pad.r;
   const plotH = h - pad.t - pad.b;
 
-  const points = data.map((d, i) => ({
-    x: pad.l + (i / Math.max(data.length - 1, 1)) * plotW,
-    y: pad.t + plotH - (d.amount / maxVal) * plotH,
-    ...d,
-  }));
+  const maxDaily = Math.max(...data.map(d => d.amount), 0.01);
+  const maxCumulative = Math.max(...data.map(d => d.cumulative), 0.01);
+  const barW = Math.max(4, (plotW / data.length) * 0.6);
 
-  const linePath = points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
-  const areaPath = linePath + ` L${points[points.length - 1].x},${pad.t + plotH} L${points[0].x},${pad.t + plotH} Z`;
+  // Scale helpers
+  const bx = (i: number) => pad.l + (i + 0.5) * (plotW / data.length);
+  const by = (v: number) => pad.t + plotH - (v / maxDaily) * plotH;
+  const cx = bx; // same x positions for cumulative line
+  const cy = (v: number) => pad.t + plotH - (v / maxCumulative) * plotH;
+
+  // Cumulative smooth path
+  const cumPoints = data.map((d, i) => ({ x: cx(i), y: cy(d.cumulative) }));
+  const cumPath = cumPoints
+    .map((p, i) => {
+      if (i === 0) return `M${p.x},${p.y}`;
+      const prev = cumPoints[i - 1];
+      const mx = (prev.x + p.x) / 2;
+      return `C${mx},${prev.y} ${mx},${p.y} ${p.x},${p.y}`;
+    })
+    .join(" ");
+  const cumAreaPath =
+    cumPath +
+    ` L${cumPoints[cumPoints.length - 1].x},${pad.t + plotH} L${cumPoints[0].x},${pad.t + plotH} Z`;
 
   const yTicks = [0, 0.25, 0.5, 0.75, 1].map(f => ({
-    val: (maxVal * f).toFixed(0),
+    val: `$${(maxDaily * f).toFixed(0)}`,
     y: pad.t + plotH - f * plotH,
   }));
+
+  // Avg per day line y
+  const avgY = by(avgPerDay);
 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto">
       <defs>
-        <linearGradient id="costAreaGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+        {/* Daily bar gradient */}
+        <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.1" />
         </linearGradient>
-        <linearGradient id="costLineGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="50%" stopColor="#3b82f6" />
+        {/* Cumulative area gradient */}
+        <linearGradient id="cumAreaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+        </linearGradient>
+        {/* Cumulative line gradient */}
+        <linearGradient id="cumLineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#6366f1" />
           <stop offset="100%" stopColor="#8b5cf6" />
         </linearGradient>
-        <filter id="glow">
+        <filter id="barGlow">
+          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <filter id="lineGlow">
           <feGaussianBlur stdDeviation="3" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
+
+      {/* Grid lines */}
       {yTicks.map((t, i) => (
         <g key={i}>
-          <line x1={pad.l} y1={t.y} x2={w - pad.r} y2={t.y} stroke="rgba(148,163,184,.06)" strokeWidth={1} />
-          <text x={pad.l - 10} y={t.y + 3} textAnchor="end" fill="#475569" fontSize={9} fontFamily="JetBrains Mono, monospace">${t.val}</text>
+          <line x1={pad.l} y1={t.y} x2={w - pad.r} y2={t.y}
+            stroke="rgba(148,163,184,0.06)" strokeWidth={1} strokeDasharray="4 4" />
+          <text x={pad.l - 8} y={t.y + 3} textAnchor="end"
+            fill="#475569" fontSize={8} fontFamily="JetBrains Mono, monospace">{t.val}</text>
         </g>
       ))}
-      <path d={areaPath} fill="url(#costAreaGrad)" />
-      <path d={linePath} fill="none" stroke="url(#costLineGrad)" strokeWidth={2.5} strokeLinejoin="round" filter="url(#glow)" />
-      {points.map((p, i) => (
-        <g key={i}>
-          <circle cx={p.x} cy={p.y} r={4} fill="#030711" stroke="#06b6d4" strokeWidth={2} />
-          {(data.length < 12 || i % 3 === 0) && (
-            <text x={p.x} y={pad.t + plotH + 18} textAnchor="middle" fill="#475569" fontSize={8} fontFamily="JetBrains Mono, monospace">
-              {new Date(p.date).toLocaleDateString("en", { month: "short", day: "numeric" })}
-            </text>
-          )}
-        </g>
+
+      {/* Average line (dashed) */}
+      {avgPerDay > 0 && (
+        <>
+          <line x1={pad.l} y1={avgY} x2={w - pad.r} y2={avgY}
+            stroke="#f59e0b" strokeWidth={1} strokeDasharray="6 3" opacity={0.5} />
+          <text x={w - pad.r + 4} y={avgY + 3}
+            fill="#f59e0b" fontSize={7} fontFamily="JetBrains Mono, monospace">avg</text>
+        </>
+      )}
+
+      {/* Daily bars */}
+      {data.map((d, i) => {
+        const x = bx(i);
+        const barHeight = (d.amount / maxDaily) * plotH;
+        return (
+          <g key={i}>
+            {/* Bar shadow */}
+            <rect
+              x={x - barW / 2 + 1} y={by(d.amount) + 2}
+              width={barW} height={barHeight}
+              fill="#06b6d4" opacity={0.08} rx={2}
+            />
+            {/* Bar */}
+            <rect
+              x={x - barW / 2} y={by(d.amount)}
+              width={barW} height={barHeight}
+              fill="url(#barGrad)" rx={3}
+              filter="url(#barGlow)"
+            />
+            {/* X-axis label */}
+            {(data.length <= 16 || i % 3 === 0) && (
+              <text x={x} y={pad.t + plotH + 14} textAnchor="middle"
+                fill="#475569" fontSize={7} fontFamily="JetBrains Mono, monospace">
+                {new Date(d.date + "T00:00:00").toLocaleDateString("en", { month: "short", day: "numeric" })}
+              </text>
+            )}
+          </g>
+        );
+      })}
+
+      {/* Cumulative area */}
+      <path d={cumAreaPath} fill="url(#cumAreaGrad)" />
+
+      {/* Cumulative line */}
+      <path d={cumPath} fill="none" stroke="url(#cumLineGrad)"
+        strokeWidth={2.5} filter="url(#lineGlow)" />
+
+      {/* Cumulative dots */}
+      {cumPoints.map((p, i) => (
+        <circle key={i} cx={p.x} cy={p.y} r={3}
+          fill="#0a0f1a" stroke="#8b5cf6" strokeWidth={2} />
       ))}
+
+      {/* Legend */}
+      <g transform={`translate(${pad.l}, ${h - 8})`}>
+        <rect x={0} y={-6} width={10} height={6} fill="#06b6d4" rx={1} opacity={0.7} />
+        <text x={13} y={0} fill="#64748b" fontSize={7} fontFamily="JetBrains Mono, monospace">Daily Spend</text>
+        <line x1={80} y1={-3} x2={90} y2={-3} stroke="#8b5cf6" strokeWidth={2} />
+        <circle cx={85} cy={-3} r={2} fill="#0a0f1a" stroke="#8b5cf6" strokeWidth={1.5} />
+        <text x={93} y={0} fill="#64748b" fontSize={7} fontFamily="JetBrains Mono, monospace">Cumulative Total</text>
+        <line x1={190} y1={-3} x2={200} y2={-3} stroke="#f59e0b" strokeWidth={1} strokeDasharray="4 2" opacity={0.7} />
+        <text x={203} y={0} fill="#64748b" fontSize={7} fontFamily="JetBrains Mono, monospace">Avg/Day</text>
+      </g>
     </svg>
   );
 }
@@ -147,9 +235,13 @@ const modules = [
 
 /* ─── Dashboard ────────────────────────────────────────────────────── */
 export default function Dashboard() {
-  const [costData, setCostData] = useState<{ date: string; amount: number }[]>([]);
+  type DayData = { date: string; amount: number; cumulative: number };
+  const [costData, setCostData] = useState<DayData[]>([]);
+  const [costStats, setCostStats] = useState<{
+    totalSpend: number; days: number; avgPerDay: number;
+    last3DayAvg: number; forecast30: number; forecast60: number; forecast90: number;
+  } | null>(null);
   const [topServices, setTopServices] = useState<{ service: string; total: number }[]>([]);
-  const [totalCost, setTotalCost] = useState(0);
   const [rdsBreakdown, setRdsBreakdown] = useState<{ id: string; amount: number }[]>([]);
   const [costLoading, setCostLoading] = useState(true);
   const [metrics, setMetrics] = useState<any>(null);
@@ -157,33 +249,21 @@ export default function Dashboard() {
   const { region } = useRegion();
 
   useEffect(() => {
-    const end = new Date();
-    const start = new Date(end.getTime() - 14 * 86400000);
-    const fmt = (d: Date) => d.toISOString().slice(0, 10);
-
     setCostLoading(true);
     setMetricsLoading(true);
 
-    fetch(`/api/cost?start=${fmt(start)}&end=${fmt(end)}`)
+    // No need to pass start/end — the API defaults to last 15 completed days
+    fetch("/api/cost")
       .then(r => r.json())
       .then(d => {
-        if (d.overall) {
-          setCostData(d.overall);
-          setTotalCost(d.overall.reduce((s: number, c: { amount: number }) => s + c.amount, 0));
-        }
-        if (d.services) {
-          const svcMap: Record<string, number> = {};
-          for (const s of d.services as { service: string; amount: number }[]) {
-            svcMap[s.service] = (svcMap[s.service] || 0) + s.amount;
-          }
-          setTopServices(Object.entries(svcMap).map(([service, total]) => ({ service, total })).sort((a, b) => b.total - a.total));
-        }
+        if (d.overall) setCostData(d.overall);
+        if (d.stats) setCostStats(d.stats);
+        if (d.services) setTopServices(d.services);
         if (d.rdsBreakdown) setRdsBreakdown(d.rdsBreakdown);
       })
       .catch(() => {})
       .finally(() => setCostLoading(false));
 
-    // Fetch overview metrics with region
     fetch(`/api/overview-metrics?region=${region}`)
       .then(r => r.json())
       .then(d => { if (!d.error) setMetrics(d); })
@@ -191,15 +271,35 @@ export default function Dashboard() {
       .finally(() => setMetricsLoading(false));
   }, [region]);
 
+  // Derive system status from API degradedSources
+  const degradedSources: string[] = metrics?.degradedSources || [];
+  const systemHealthy = !metricsLoading && metrics && degradedSources.length === 0;
+
   return (
-    <div className="flex flex-col gap-8 max-w-[1280px] mx-auto">
+    <div className="flex flex-col gap-8 w-full">
       {/* ── Hero Header ──────────────────────── */}
       <div className="relative pt-2">
         <div className="flex items-center gap-2 mb-4">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/[0.08] border border-cyan-500/15">
-            <Activity size={11} className="text-cyan-400" />
-            <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-[0.15em]">All Systems Operational</span>
-          </div>
+          {metricsLoading ? (
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-500/[0.08] border border-slate-500/15">
+              <Loader size={11} className="text-slate-400 animate-spin" />
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.15em]">Checking System Status…</span>
+            </div>
+          ) : systemHealthy ? (
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/[0.08] border border-cyan-500/15">
+              <Activity size={11} className="text-cyan-400" />
+              <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-[0.15em]">All Systems Operational</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/[0.08] border border-amber-500/15">
+              <AlertTriangle size={11} className="text-amber-400" />
+              <span className="text-[10px] text-amber-400 font-bold uppercase tracking-[0.15em]">
+                {degradedSources.length > 0
+                  ? `Partial Data — ${degradedSources.join(", ").toUpperCase()} unavailable`
+                  : "Checking system status…"}
+              </span>
+            </div>
+          )}
         </div>
         <h1 className="text-4xl font-bold text-white tracking-tight">
           Cloud <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Observability</span>
@@ -217,14 +317,15 @@ export default function Dashboard() {
                 <div className="w-6 h-6 rounded-md bg-cyan-500/10 flex items-center justify-center">
                   <DollarSign size={12} className="text-cyan-400" />
                 </div>
-                Cost Trend
+                Cost Trend — Daily + Cumulative
               </h2>
-              <p className="text-[10px] text-slate-600 mt-0.5 ml-8">14-day daily spend</p>
+              <p className="text-[10px] text-slate-600 mt-0.5 ml-8">Last 15 completed days · All figures from AWS Cost Explorer</p>
             </div>
-            {!costLoading && (
+            {!costLoading && costStats && (
               <div className="text-right">
-                <p className="text-cyan-400 font-bold text-2xl font-mono-brand">${totalCost.toFixed(2)}</p>
-                <p className="text-[9px] text-slate-600 uppercase tracking-widest">14-day total</p>
+                <p className="text-cyan-400 font-bold text-2xl font-mono-brand">${costStats.totalSpend.toFixed(2)}</p>
+                <p className="text-[9px] text-slate-600 uppercase tracking-widest">{costStats.days}-day total</p>
+                <p className="text-[9px] text-amber-400/80 mt-0.5">${costStats.avgPerDay.toFixed(2)}/day avg</p>
               </div>
             )}
           </div>
@@ -233,7 +334,7 @@ export default function Dashboard() {
               <Loader size={14} className="animate-spin text-cyan-400" /> Loading cost data…
             </div>
           ) : (
-            <CostChart data={costData} />
+            <CostChart data={costData} avgPerDay={costStats?.avgPerDay ?? 0} />
           )}
         </div>
 

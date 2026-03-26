@@ -12,7 +12,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "instanceId is required" }, { status: 400 });
   }
 
-  const cw = getCloudWatchClient();
+  const region = searchParams.get("region") || undefined;
+  const cw = getCloudWatchClient(region);
   const end = new Date();
   const start = new Date(end.getTime() - hours * 3600000);
   // 5-min periods for <=6h, 1h periods for >6h

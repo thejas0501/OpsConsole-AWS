@@ -1,21 +1,20 @@
 import { NextResponse } from "next/server";
 import { CloudTrailClient, LookupEventsCommand } from "@aws-sdk/client-cloudtrail";
 
-function getCreds() {
-  const accessKeyId = process.env.AWS_ACCESS_KEY_ID?.trim();
-  const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY?.trim();
-  const sessionToken = process.env.AWS_SESSION_TOKEN?.trim();
-
-  if (!accessKeyId || !secretAccessKey) return undefined;
-
-  return {
-    accessKeyId,
-    secretAccessKey,
-    sessionToken,
-  };
+function getCloudTrailClient(region?: string): CloudTrailClient {
+  return new CloudTrailClient({
+    region: region || process.env.AWS_DEFAULT_REGION || "ap-south-1",
+    credentials: process.env.AWS_ACCESS_KEY_ID
+      ? {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID.trim(),
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!.trim(),
+          ...(process.env.AWS_SESSION_TOKEN
+            ? { sessionToken: process.env.AWS_SESSION_TOKEN.trim() }
+            : {}),
+        }
+      : undefined, // Falls back to IAM role / instance profile
+  });
 }
-
-function getRegion(r?: string | null) { return r || process.env.AWS_DEFAULT_REGION || "ap-south-1"; }
 
 // Map AWS API events to user-friendly reasons and recovery steps
 const recoveryMap: Record<string, { reason: string; severity: "critical" | "warning" | "info"; recovery: string[] }> = {
@@ -69,13 +68,9 @@ const recoveryMap: Record<string, { reason: string; severity: "critical" | "warn
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const region = getRegion(searchParams.get("region"));
-    const creds = getCreds();
-    if (!creds) {
-       return NextResponse.json({ error: "AWS credentials not found in environment." }, { status: 401 });
-    }
+    const region = searchParams.get("region") || process.env.AWS_DEFAULT_REGION || "ap-south-1";
 
-    const ct = new CloudTrailClient({ region, credentials: creds });
+    const ct = getCloudTrailClient(region);
 
     // Look back 7 days
     const StartTime = new Date();

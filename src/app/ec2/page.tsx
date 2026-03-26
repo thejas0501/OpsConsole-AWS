@@ -69,7 +69,7 @@ export default function EC2Page() {
     if (liveMetrics[instanceId]) return; // already fetched
     setMetricsLoading(prev => ({ ...prev, [instanceId]: true }));
     try {
-      const res = await fetch(`/api/live-metrics?instanceId=${instanceId}&type=ec2&hours=6`);
+      const res = await fetch(`/api/live-metrics?instanceId=${instanceId}&type=ec2&hours=6&region=${region}`);
       const d = await res.json();
       if (d.metrics) setLiveMetrics(prev => ({ ...prev, [instanceId]: d.metrics }));
     } catch { }

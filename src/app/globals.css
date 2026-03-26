@@ -19,7 +19,6 @@
     color: var(--color-foreground);
     font-family: 'Space Grotesk', system-ui, sans-serif;
     @apply antialiased;
-    min-height: 100vh;
   }
 
   /* Sleek scrollbars */

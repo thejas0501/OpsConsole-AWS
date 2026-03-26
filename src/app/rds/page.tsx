@@ -18,7 +18,7 @@ export default function RDSDashboard() {
 
     Promise.all([
       fetch(`/api/rds?region=${region}`).then(res => res.ok ? res.json() : []),
-      fetch(`/api/cost?start=${fmt(start)}&end=${fmt(end)}`).then(res => res.ok ? res.json() : {})
+      fetch(`/api/cost`).then(res => res.ok ? res.json() : {})
     ])
       .then(([rdsRes, costRes]: [any, any]) => {
          const rdsInstances = Array.isArray(rdsRes) ? rdsRes : [];
@@ -42,7 +42,7 @@ export default function RDSDashboard() {
            let rdsTotalCost = 0;
            for (const s of costRes.services) {
              if ((s.service as string)?.includes("Relational Database")) {
-               rdsTotalCost += s.amount;
+               rdsTotalCost += (s.total || s.amount || 0);
              }
            }
            if (rdsTotalCost > 0) {
@@ -75,8 +75,9 @@ export default function RDSDashboard() {
   const totalCostDisplay = totalRdsCost > 0 ? totalRdsCost.toFixed(2) : "—";
 
   // Stats
-  const over = data.filter(d => !d.IsRisky).length;
-  const rightSized = data.filter(d => d.IsRisky).length;
+  // IsRisky=true means high CPU or critically low storage → over-provisioned
+  const over = data.filter(d => d.IsRisky).length;
+  const rightSized = data.filter(d => !d.IsRisky).length;
 
 
 
