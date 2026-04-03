@@ -21,7 +21,9 @@ jobs:
             set -e
             cd ~/opsconsole
 
-            # Pull latest code
+            # Force-reset any local changes (e.g. .env.local written by previous deploy)
+            git checkout -- . 2>/dev/null || true
+            git clean -fd 2>/dev/null || true
             git pull origin master
 
             # Write .env.local from environment variables (injected from GitHub Secrets)
@@ -35,10 +37,10 @@ jobs:
             SESSION_SECRET=${SESSION_SECRET}
             ENVEOF
 
-            # Ensure .env.local has no leading whitespace
+            # Remove leading whitespace from heredoc
             sed -i 's/^[[:space:]]*//' .env.local
 
-            # Install dependencies (skip if node_modules is current)
+            # Install dependencies
             npm install --prefer-offline 2>/dev/null || npm install
 
             # Production build
@@ -48,7 +50,7 @@ jobs:
             pm2 restart opsconsole 2>/dev/null || pm2 start npm --name "opsconsole" -- start
             pm2 save
 
-            echo "✅ Deploy complete"
+            echo "Deploy complete"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
