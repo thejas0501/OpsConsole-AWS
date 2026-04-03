@@ -5,6 +5,7 @@ import { RDSClient } from "@aws-sdk/client-rds";
 import { EC2Client } from "@aws-sdk/client-ec2";
 import { S3Client } from "@aws-sdk/client-s3";
 import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
+import { LambdaClient } from "@aws-sdk/client-lambda";
 
 // Load credentials from environment (Next.js automatically loads .env files)
 const getAwsConfig = (region?: string) => {
@@ -27,3 +28,4 @@ export const getRdsClient = (region?: string) => new RDSClient(getAwsConfig(regi
 export const getEc2Client = (region?: string) => new EC2Client(getAwsConfig(region));
 export const getS3Client = (region?: string) => new S3Client(getAwsConfig(region));
 export const getCloudWatchClient = (region?: string) => new CloudWatchClient(getAwsConfig(region));
+export const getLambdaClient = (region?: string) => new LambdaClient(getAwsConfig(region));

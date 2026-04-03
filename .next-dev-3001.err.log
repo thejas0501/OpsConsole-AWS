@@ -1,0 +1,732 @@
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+RDS Resource Level Cost Error: ValidationException: Group Definition dimension is invalid. Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, SERVICE, USAGE_TYPE, PLATFORM, TENANCY, RECORD_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, REGION, BILLING_ENTITY, RESERVATION_ID, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, OPERATING_SYSTEM, PAYER_ACCOUNT
+    at async GET (src\app\api\cost\route.ts:96:22)
+  94 |     let rdsBreakdown: { id: string; amount: number }[] = [];
+  95 |     try {
+> 96 |       const rdsRes = await ce.send(new GetCostAndUsageCommand({
+     |                      ^
+  97 |         TimePeriod: { Start: start, End: end },
+  98 |         Granularity: "DAILY",
+  99 |         Metrics: ["UnblendedCost"], {
+  '$fault': 'client',
+  '$retryable': undefined,
+  '$metadata': [Object],
+  __type: 'ValidationException'
+}
+CW Error for bucket cloudsre-command-center-raw-data Error: getaddrinfo ENOTFOUND monitoring.us-east-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.us-east-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket codepipeline-ap-south-1-544978452836 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket codepipeline-us-east-1-501378898596 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket copy-content-mu-backend Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket cpr-mu Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket cw-syn-results-081364381589-ap-south-1 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket dev-mediaconvert-lambdas Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket dev-smac Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket dev-stream-media-input-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket dev-stream-media-output-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket dinero-doc Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket dinero-prod-snapshot-27jan2025 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket elasticbeanstalk-ap-south-1-081364381589 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket elasticbeanstalk-us-east-1-081364381589 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket epicenter2022 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket ets-local-input Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket ets-local-output Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket ets-local-thumbs Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket filestack-dinero Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket filestack-mastersunion Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket get-prepped Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket getprepped-uploads Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket getprepped.in Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket getpreppedstaging Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket isbf-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket launchpad-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket leads-downloaded-data-csv Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket local-mediaconvert-lambdas Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket local-stream-media-input-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket local-stream-media-output-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mastercamp.org Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mastercamps Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mastercamps.in Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket masterscamps.in Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mastersunion Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mastersunion.getprepped.in Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mastersunion.mentorlo.com Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mediaconvertlambdabucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mentorlo Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mentorlo-meet Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mentorship-recordings Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mock-ai-uploads Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-ai-asset Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-ai-chat Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-ai-fe Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-hybrid Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-ozonetel Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-resume Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-student-resume Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-uploads Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket mu-zoomrecordings Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket myserverlessprojectuploadbuecket1579 Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket neta-cloudinary-backup Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket neta-instagramstories-testing Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket neta-instagramstories-testing-output-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket neta-public-assets Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket neta-staging Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket newmu Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket offer-letters-pdf Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket outbound-attachments Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket pdf-demo-dev-serverlessdeploymentbucket-1w0rfn5nq18ee Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket prod-mediaconvert-lambdas Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket prod-stream-media-input-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket prod-stream-media-output-s3-bucket Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket reports-dev-stream-media-input Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket reports-local-stream-media-input Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket reports-prod-stream-media-input Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket stagin-neta Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket tetr Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket tetr-ai-chat Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket tetr-ai-fe Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket tetr-codepush-bundles Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket tetr.org Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket websiteinstagramleads Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket www.mastercamps.in Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket www.mastersunion.org Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket www.tetr.com Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket zoom-manual-recordings Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+CW Error for bucket zoomsdk-rec Error: getaddrinfo ENOTFOUND monitoring.ap-south-1.amazonaws.com
+    at ignore-listed frames {
+  errno: -3008,
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'monitoring.ap-south-1.amazonaws.com',
+  '$metadata': [Object]
+}
+^C^C

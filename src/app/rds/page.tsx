@@ -12,10 +12,6 @@ export default function RDSDashboard() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const end = new Date();
-    const start = new Date(end.getTime() - 14 * 86400000);
-    const fmt = (d: Date) => d.toISOString().slice(0, 10);
-
     Promise.all([
       fetch(`/api/rds?region=${region}`).then(res => res.ok ? res.json() : []),
       fetch(`/api/cost`).then(res => res.ok ? res.json() : {})
