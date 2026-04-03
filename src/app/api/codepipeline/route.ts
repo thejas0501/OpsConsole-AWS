@@ -23,13 +23,16 @@ export async function GET(request: Request) {
         items.map(async (p) => {
           try {
             const state = await cp.send(new GetPipelineStateCommand({ name: p.name! }));
-            const latest = state.stageStates?.[0]?.latestExecution;
+            // Get the most recent action state for last-execution time
+            const stageState = state.stageStates?.[0];
+            const latest = stageState?.latestExecution;
+            const lastActionTime = stageState?.actionStates?.[0]?.latestExecution?.lastStatusChange;
             pipelines.push({
               Name: p.name,
               Created: p.created?.toISOString(),
               Updated: p.updated?.toISOString(),
               LastExecutionStatus: latest?.status,
-              LastExecutionTime: latest?.lastStatusChange?.toISOString(),
+              LastExecutionTime: lastActionTime instanceof Date ? lastActionTime.toISOString() : null,
             });
           } catch {
             pipelines.push({ Name: p.name, Created: p.created?.toISOString(), Updated: p.updated?.toISOString() });

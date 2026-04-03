@@ -36,7 +36,14 @@ export async function GET(request: Request) {
             Filters: [{ Name: "status", Values: ["available"] }]
         });
         const ebsRes = await ec2.send(ebsCmd);
-        waste.unattachedEbs = ebsRes.Volumes || [];
+        waste.unattachedEbs = (ebsRes.Volumes || []).map((v: any) => ({
+            VolumeId: v.VolumeId,
+            Size: v.Size,
+            VolumeType: v.VolumeType,
+            CreateTime: v.CreateTime,
+            // Extract Name tag for human-readable display
+            Name: (v.Tags || []).find((t: any) => t.Key === "Name")?.Value || null,
+        }));
     } catch (e) {
         console.warn("EBS fetch error", e);
     }

@@ -6,6 +6,7 @@ import { EC2Client } from "@aws-sdk/client-ec2";
 import { S3Client } from "@aws-sdk/client-s3";
 import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
 import { LambdaClient } from "@aws-sdk/client-lambda";
+import { IAMClient } from "@aws-sdk/client-iam";
 
 // Load credentials from environment (Next.js automatically loads .env files)
 const getAwsConfig = (region?: string) => {
@@ -29,3 +30,5 @@ export const getEc2Client = (region?: string) => new EC2Client(getAwsConfig(regi
 export const getS3Client = (region?: string) => new S3Client(getAwsConfig(region));
 export const getCloudWatchClient = (region?: string) => new CloudWatchClient(getAwsConfig(region));
 export const getLambdaClient = (region?: string) => new LambdaClient(getAwsConfig(region));
+// IAM is always us-east-1 (global service)
+export const getIamClient = () => new IAMClient(getAwsConfig("us-east-1"));

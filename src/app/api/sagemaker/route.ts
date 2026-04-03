@@ -23,7 +23,6 @@ export async function GET(request: Request) {
           EndpointStatus: e.EndpointStatus,
           CreationTime: e.CreationTime?.toISOString(),
           LastModifiedTime: e.LastModifiedTime?.toISOString(),
-          EndpointConfigName: e.EndpointConfigName || null,
         });
       }
       nextToken = res.NextToken;
