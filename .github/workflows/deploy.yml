@@ -20,10 +20,9 @@ jobs:
             set -e
             cd ~/opsconsole
 
-            # Force-reset any local changes (e.g. .env.local written by previous deploy)
-            git checkout -- . 2>/dev/null || true
-            git clean -fd 2>/dev/null || true
-            git pull origin master
+            # Hard reset to remote — bypasses rebase/unstaged errors completely
+            git fetch origin master
+            git reset --hard origin/master
 
             # Write .env.local with credentials
             printf '%s\n' \
