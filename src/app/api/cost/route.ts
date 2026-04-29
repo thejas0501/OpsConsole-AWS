@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { GetCostAndUsageCommand, GetCostAndUsageCommandOutput } from "@aws-sdk/client-cost-explorer";
+import { GetCostAndUsageCommand, GetCostAndUsageCommandOutput, GetCostAndUsageWithResourcesCommand } from "@aws-sdk/client-cost-explorer";
 import { getCostExplorerClient } from "@/lib/aws-clients";
 
 export async function GET(request: Request) {
@@ -149,7 +149,7 @@ export async function GET(request: Request) {
     // ── RDS per-resource breakdown ─────────────────────────────────────
     let rdsBreakdown: { id: string; amount: number }[] = [];
     try {
-      const rdsRes = await ce.send(new GetCostAndUsageCommand({
+      const rdsRes = await ce.send(new GetCostAndUsageWithResourcesCommand({
         TimePeriod: { Start: start, End: end },
         Granularity: "DAILY",
         Metrics: ["UnblendedCost"],
